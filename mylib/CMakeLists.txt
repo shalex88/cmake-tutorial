@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(cmake-tutorial)
+project(mylib)
 
 set(CMAKE_CXX_STANDARD 20)
 
@@ -8,9 +8,4 @@ file(GLOB_RECURSE SOURCES "src/*.cpp")
 file(GLOB_RECURSE HEADERS "inc/*.h")
 
 add_compile_options(-Wall -Wextra -Wpedantic)
-add_executable(${PROJECT_NAME} main.cpp ${SOURCES} ${HEADERS})
-
-add_subdirectory(mylib)
-include_directories(mylib/inc)
-
-target_link_libraries(${PROJECT_NAME} PRIVATE mylib)
+add_library(${PROJECT_NAME} SHARED ${SOURCES} ${HEADERS})
