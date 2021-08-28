@@ -1,5 +1,6 @@
 #include <iostream>
 #include <mylib.h>
+#include "version.h"
 
 extern const char* git_tag;
 extern const char* git_rev;
