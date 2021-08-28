@@ -1,6 +1,6 @@
 #include <iostream>
-#include <mylib_a.h>
-#include <mylib_b.h>
+#include "mylib_a.h"
+#include "mylib_b.h"
 #include "version.h"
 
 extern const char* git_tag;

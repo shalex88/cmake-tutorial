@@ -8,8 +8,10 @@ message(STATUS "${PROJECT_NAME}")
 # Bad practice - include only required for build procedures
 if(UNIX)
     message(STATUS "Linux Platform")
+    add_compile_options(-Wall -Wextra -Wpedantic)
 elseif(WIN32)
     message(STATUS "Windows Platform")
+    add_compile_options(/W4)
 else()
     message(WARNING "Unknown Platform")
 endif()
@@ -28,7 +30,6 @@ configure_file (
 )
 set(GLOB_RECURSE BINARY_DIR_HEADERS ${PROJECT_BINARY_DIR}/inc/*.h)
 
-add_compile_options(-Wall -Wextra -Wpedantic)
 add_executable(${PROJECT_NAME} main.cpp ${CMAKE_CURRENT_BINARY_DIR}/version.cpp ${SOURCES} ${HEADERS} ${BINARY_DIR_HEADERS})
 target_include_directories(${PROJECT_NAME} PRIVATE inc)
 target_include_directories(${PROJECT_NAME} PRIVATE ${PROJECT_BINARY_DIR}/inc)
