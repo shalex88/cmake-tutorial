@@ -38,3 +38,15 @@ add_subdirectory(${LIBS}/mylib_a)
 add_subdirectory(${LIBS}/mylib_b)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE mylib_a)
+
+# graphviz - Dependency graph generator
+# sudo apt install graphviz
+find_program(GRAPHVIZ "dot")
+if(GRAPHVIZ)
+    add_custom_target(graphviz ALL
+        COMMAND ${CMAKE_COMMAND} "--graphviz=graphviz/dependency.dot" .
+        COMMAND dot -Tpng graphviz/dependency.dot -o graphviz/dependency.png
+        WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")
+else()
+    message(WARNING "graphviz is not installed")
+endif()
