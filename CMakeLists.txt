@@ -3,6 +3,8 @@ project(cmake-tutorial VERSION 1.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 
+message(STATUS "${PROJECT_NAME}")
+
 # Bad practice - include only required for build procedures
 if(UNIX)
     message(STATUS "Linux Platform")
@@ -24,7 +26,7 @@ file(GLOB_RECURSE HEADERS "inc/*.h")
 add_compile_options(-Wall -Wextra -Wpedantic)
 add_executable(${PROJECT_NAME} main.cpp ${CMAKE_CURRENT_BINARY_DIR}/version.cpp ${SOURCES} ${HEADERS})
 
-add_subdirectory(mylib)
-include_directories(mylib/inc)
+set(LIBS libs)
+add_subdirectory(${LIBS}/mylib)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE mylib)
