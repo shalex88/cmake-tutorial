@@ -34,6 +34,7 @@ add_compile_options(-Wall -Wextra -Wpedantic)
 add_executable(${PROJECT_NAME} main.cpp ${CMAKE_CURRENT_BINARY_DIR}/version.cpp ${SOURCES} ${HEADERS} ${BINARY_DIR_HEADERS})
 
 set(LIBS libs)
-add_subdirectory(${LIBS}/mylib)
+add_subdirectory(${LIBS}/mylib_a)
+add_subdirectory(${LIBS}/mylib_b)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE mylib)
+target_link_libraries(${PROJECT_NAME} PRIVATE mylib_a)

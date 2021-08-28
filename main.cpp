@@ -1,5 +1,6 @@
 #include <iostream>
-#include <mylib.h>
+#include <mylib_a.h>
+#include <mylib_b.h>
 #include "version.h"
 
 extern const char* git_tag;
@@ -8,7 +9,8 @@ extern const char* git_branch;
 
 int main() {
     std::cout << "Hello, World!" << std::endl;
-    my_lib();
+    my_lib_a();
+    my_lib_b();
     std::cout << git_branch << "/" << git_rev << std::endl;
 
     return 0;
