@@ -17,7 +17,7 @@ endif()
 message(STATUS "${CMAKE_GENERATOR} Generator")
 
 add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/version.cpp ${CMAKE_CURRENT_BINARY_DIR}/_version.cpp
-    COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_SOURCE_DIR}/version.cmake)
+    COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/version.cmake)
 
 include_directories(inc)
 file(GLOB_RECURSE SOURCES "src/*.cpp")
