@@ -5,6 +5,11 @@ set(CMAKE_CXX_STANDARD 20)
 
 message(STATUS "${PROJECT_NAME}")
 
+# Handle finding the shared libraries on Windows, use for all platforms
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/bin")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/bin")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/bin")
+
 # Bad practice - include only required for build procedures
 if(UNIX)
     message(STATUS "Linux Platform")
@@ -12,6 +17,10 @@ if(UNIX)
 elseif(WIN32)
     message(STATUS "Windows Platform")
     add_compile_options(/W4)
+
+    # Handle building shared libraries on Windows
+    set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
+    set(BUILD_SHARED_LIBS TRUE)
 else()
     message(WARNING "Unknown Platform")
 endif()
@@ -41,7 +50,7 @@ add_subdirectory(${LIBS}/mylib_b)
 target_link_libraries(${PROJECT_NAME} PRIVATE mylib_a)
 
 # graphviz - Dependency graph generator
-# sudo apt install graphviz
+# sudo apt install graphviz0
 find_program(GRAPHVIZ "dot")
 if(GRAPHVIZ)
     add_custom_target(graphviz ALL

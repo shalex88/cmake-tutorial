@@ -1,6 +1,7 @@
 # IDE files
 /.idea/
 /.vscode/
+/.vs/
 
 # Build artifacts
 /*build*/
