@@ -39,7 +39,7 @@ configure_file (
 )
 set(GLOB_RECURSE BINARY_DIR_HEADERS ${PROJECT_BINARY_DIR}/inc/*.h)
 
-add_executable(${PROJECT_NAME} main.cpp ${CMAKE_CURRENT_BINARY_DIR}/version.cpp ${SOURCES} ${HEADERS} ${BINARY_DIR_HEADERS})
+add_executable(${PROJECT_NAME} ${CMAKE_CURRENT_BINARY_DIR}/version.cpp ${SOURCES} ${HEADERS} ${BINARY_DIR_HEADERS})
 target_include_directories(${PROJECT_NAME} PRIVATE inc)
 target_include_directories(${PROJECT_NAME} PRIVATE ${PROJECT_BINARY_DIR}/inc)
 
