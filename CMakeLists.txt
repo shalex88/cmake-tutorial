@@ -30,14 +30,14 @@ message(STATUS "${CMAKE_GENERATOR} Generator")
 add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/version.cpp ${CMAKE_CURRENT_BINARY_DIR}/_version.cpp
     COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/version.cmake)
 
-file(GLOB_RECURSE SOURCES "src/*.cpp")
-file(GLOB_RECURSE HEADERS "inc/*.h")
+file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS "src/*.cpp")
+file(GLOB_RECURSE HEADERS CONFIGURE_DEPENDS "inc/*.h")
 
 configure_file (
     "${PROJECT_SOURCE_DIR}/inc/version.h.in"
     "${PROJECT_BINARY_DIR}/inc/version.h"
 )
-set(GLOB_RECURSE BINARY_DIR_HEADERS ${PROJECT_BINARY_DIR}/inc/*.h)
+set(GLOB_RECURSE BINARY_DIR_HEADERS CONFIGURE_DEPENDS ${PROJECT_BINARY_DIR}/inc/*.h)
 
 add_executable(${PROJECT_NAME} ${CMAKE_CURRENT_BINARY_DIR}/version.cpp ${SOURCES} ${HEADERS} ${BINARY_DIR_HEADERS})
 target_include_directories(${PROJECT_NAME} PRIVATE inc)
