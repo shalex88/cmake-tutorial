@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 project(cmake-tutorial VERSION 1.0.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -14,10 +14,10 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/bin")
 if(UNIX)
     message(STATUS "Linux Platform")
     add_compile_options(-Wall -Wextra -Wpedantic)
+    add_compile_definitions(EMBEDDED_LINUX)
 elseif(WIN32)
     message(STATUS "Windows Platform")
     add_compile_options(/W4)
-
     # Handle building shared libraries on Windows
     set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS TRUE)
     set(BUILD_SHARED_LIBS TRUE)
@@ -37,7 +37,7 @@ configure_file (
     "${PROJECT_SOURCE_DIR}/inc/version.h.in"
     "${PROJECT_BINARY_DIR}/inc/version.h"
 )
-set(GLOB_RECURSE BINARY_DIR_HEADERS CONFIGURE_DEPENDS ${PROJECT_BINARY_DIR}/inc/*.h)
+file(GLOB_RECURSE BINARY_DIR_HEADERS CONFIGURE_DEPENDS ${PROJECT_BINARY_DIR}/inc/*.h)
 
 add_executable(${PROJECT_NAME} ${CMAKE_CURRENT_BINARY_DIR}/version.cpp ${SOURCES} ${HEADERS} ${BINARY_DIR_HEADERS})
 target_include_directories(${PROJECT_NAME} PRIVATE inc)

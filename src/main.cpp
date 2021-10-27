@@ -11,6 +11,9 @@ int main() {
     std::cout << "Hello, World!" << std::endl;
     my_lib_a();
     my_lib_b();
+    #ifdef EMBEDDED_LINUX
+        std::cout << "Define in App!!!" << std::endl;
+    #endif
     std::cout << git_branch << "/" << git_rev << std::endl;
 
     return 0;
